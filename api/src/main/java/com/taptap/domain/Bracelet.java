@@ -9,7 +9,6 @@ import java.util.Collection;
 /**
  * Created by Nicolas on 05/01/2017.
  */
-@CrossOrigin(origins = "*", maxAge = 3600)
 @Entity
 public class Bracelet {
     @Id

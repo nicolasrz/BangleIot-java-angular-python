@@ -2,12 +2,9 @@ package com.taptap.domain;
 
 import javax.persistence.*;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-
 /**
  * Created by Nicolas on 05/01/2017.
  */
-@CrossOrigin(origins = "*", maxAge = 3600)
 @Entity
 @Table(name="person")
 public class Person {
