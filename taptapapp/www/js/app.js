@@ -12,11 +12,21 @@ app.config(function($routeProvider){
 	.otherwise({redirectTo:'/'});
 })	
 
-app.controller('MainCtrl', function($scope){
+app.controller('MainCtrl', function($scope, $http){
 
-	$scope.compteur = 10;
-
-	$scope.incrementCompteur = function(){
-		$scope.compteur ++;
+	$scope.connection = function(){
+		var firstname = $scope.firstname;
+		var lastname = $scope.lastname;
+		
+		$http({
+		  method: 'GET',
+		  url: 'http://149.202.62.129:8080/person?firstname='+firstname+'&lastname='+lastname
+		}).then(function successCallback(response) {
+			    console.log(response);
+		  }, function errorCallback(response) {
+		    alert('error maggle');
+		  });
 	}
+	
+	
 })
