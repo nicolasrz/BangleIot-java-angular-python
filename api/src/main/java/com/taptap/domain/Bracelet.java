@@ -15,7 +15,7 @@ public class Bracelet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String device_identifier;
+    private String deviceIdentifier;
 
     @ManyToMany
     private Collection<Bracelet> bracelets ;
@@ -29,10 +29,10 @@ public class Bracelet {
     }
 
     public String getDevice_identifier() {
-        return device_identifier;
+        return deviceIdentifier;
     }
 
-    public void setDevice_identifier(String device_identifier) {
-        this.device_identifier = device_identifier;
+    public void setDevice_identifier(String deviceIdentifier) {
+        this.deviceIdentifier = deviceIdentifier;
     }
 }
