@@ -1,12 +1,6 @@
 package com.taptap.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -14,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.taptap.domain.*;
+import com.taptap.domain.Bracelet;
 import com.taptap.domain.BraceletRepository;
+import com.taptap.domain.Person;
+import com.taptap.domain.PersonRepository;
 
 @RestController
 
