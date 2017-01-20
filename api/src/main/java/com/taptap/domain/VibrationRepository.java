@@ -9,7 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "vibration", path = "vibration")
 public interface VibrationRepository extends PagingAndSortingRepository<Vibration, Long> {
 
-    List<Vibration> findByBracelet(@Param("bracelet") String bracelet);
+    List<Vibration> findByBracelet(@Param("bracelet") Bracelet id);
 
 
 }

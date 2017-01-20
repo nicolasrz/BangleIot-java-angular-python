@@ -6,13 +6,29 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div> -->
-        <div ng-controller="MainCtrl">
-            <form>
+        <div ng-controller="MainCtrl" class="container-fluid">
+           <!--  <form>
                 First Name: <input type="text" ng-model="firstname">
                 Last Name: <input type="text" ng-model="lastname"
 
             </form>
-             <button ng-click="connection()">Connection</button>
+             <button ng-click="connection()">Connection</button> -->
+
+
+            <form class="pure-form pure-form-stacked">
+        <fieldset>
+            <legend>Connection</legend>
+    
+            <label for="text">Firstname</label>
+            <input id="text" type="text" placeholder="Firstname" ng-model="firstname">
+    
+            <label for="text">Lastname</label>
+            <input id="text" type="text" placeholder="Lastname" ng-model="lastname">
+    
+    
+            <button type="submit" class="pure-button pure-button-primary" ng-click="connection()">Sign in</button>
+        </fieldset>
+    </form>
 
 
         </div>

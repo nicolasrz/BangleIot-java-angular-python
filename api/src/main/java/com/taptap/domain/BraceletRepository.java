@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource(collectionResourceRel = "bracelet", path = "bracelet")
 public interface BraceletRepository extends PagingAndSortingRepository<Bracelet, Long> {
 
-    List<Person> findById(@Param("id") long id);
+    Bracelet findById(@Param("id") long id);
 
 
 }

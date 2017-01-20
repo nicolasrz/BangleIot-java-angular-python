@@ -20,7 +20,8 @@ public class Bracelet {
     @ManyToMany
     private Collection<Bracelet> bracelets ;
 
-    public long getId() {
+
+	public long getId() {
         return id;
     }
 

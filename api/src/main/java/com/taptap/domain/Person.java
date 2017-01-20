@@ -18,8 +18,9 @@ public class Person {
 
     @OneToOne
     private Bracelet bracelet;
+    
 
-    public String getFirstname() {
+	public String getFirstname() {
         return firstname;
     }
 
