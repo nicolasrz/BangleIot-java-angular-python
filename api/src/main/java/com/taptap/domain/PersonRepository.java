@@ -14,7 +14,7 @@ public interface PersonRepository extends PagingAndSortingRepository<Person, Lon
 
     Person findByLastname(@Param("lastname") String lastname);
     Person findByFirstname(@Param("firstname") String firstname);
-	Person findByFirstnameAndLastname(@Param("firstname") String firstname, @Param("lastname") String lastname);
+	Person findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
 	Person findById(@Param("id") long id);
 
 

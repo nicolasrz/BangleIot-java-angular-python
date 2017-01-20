@@ -29,11 +29,22 @@ public class Bracelet {
         this.id = id;
     }
 
-    public String getDevice_identifier() {
-        return deviceIdentifier;
-    }
 
-    public void setDevice_identifier(String deviceIdentifier) {
-        this.deviceIdentifier = deviceIdentifier;
-    }
+	public String getDeviceIdentifier() {
+		return deviceIdentifier;
+	}
+
+	public void setDeviceIdentifier(String deviceIdentifier) {
+		this.deviceIdentifier = deviceIdentifier;
+	}
+
+	public Collection<Bracelet> getBracelets() {
+		return bracelets;
+	}
+
+	public void setBracelets(Collection<Bracelet> bracelets) {
+		this.bracelets = bracelets;
+	}
+    
+    
 }
