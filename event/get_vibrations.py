@@ -6,7 +6,7 @@ import sys
 import time
 def get_vibrations():
     device_identifier = "bracelet_nicolas"
-    conn = mysql.connector.connect(host="149.202.62.129",user="taptapapi",password="taptapapi", database="taptapapi")
+    conn = mysql.connector.connect(host="adresse of server api",user="taptapapi",password="taptapapi", database="taptapapi")
     cursor = conn.cursor()
     cursor.execute("SELECT bracelet_id FROM bracelet WHERE device_identifier = '" + device_identifier +"'")
     bracelet_associated = cursor.fetchone()
