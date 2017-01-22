@@ -13,7 +13,7 @@ def get_vibrations():
     bracelet_associated = bracelet_associated[0]
     cursor.execute("SELECT * FROM vibration WHERE bracelet_id = '"+str(bracelet_associated)+"' AND state = 1")
     vibrations = cursor.fetchall()
-	if(len(vibrations) > 0 ):
+    if(len(vibrations) > 0 ):
         print str(len(vibrations)) + " vibrations à envoyer"
     vibs_to_send = len(vibrations)
     for vib in vibrations:
