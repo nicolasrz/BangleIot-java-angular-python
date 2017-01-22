@@ -1,6 +1,6 @@
 "# Event RPI"
 
-cd /mysql-connector-python-2.0.4
+cd mysql-connector-python-2.0.4 <br>
 python setup.py install
 
 #Lauch script
