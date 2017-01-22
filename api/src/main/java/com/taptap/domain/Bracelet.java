@@ -2,10 +2,6 @@ package com.taptap.domain;
 
 import javax.persistence.*;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-
-import java.util.Collection;
-
 /**
  * Created by Nicolas on 05/01/2017.
  */
@@ -17,9 +13,20 @@ public class Bracelet {
 
     private String deviceIdentifier;
 
-    @ManyToMany
-    private Collection<Bracelet> bracelets ;
+    @OneToOne
+    private Bracelet bracelet;
+    
+    
 
+
+	public Bracelet() {
+		super();
+	}
+
+	public Bracelet(String deviceIdentifier) {
+		super();
+		this.deviceIdentifier = deviceIdentifier;
+	}
 
 	public long getId() {
         return id;
@@ -38,13 +45,15 @@ public class Bracelet {
 		this.deviceIdentifier = deviceIdentifier;
 	}
 
-	public Collection<Bracelet> getBracelets() {
-		return bracelets;
+	public Bracelet getBracelet() {
+		return bracelet;
 	}
 
-	public void setBracelets(Collection<Bracelet> bracelets) {
-		this.bracelets = bracelets;
+	public void setBracelet(Bracelet bracelet) {
+		this.bracelet = bracelet;
 	}
+
+	
     
     
 }

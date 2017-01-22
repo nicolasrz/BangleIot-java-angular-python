@@ -20,6 +20,22 @@ public class Person {
 
     @OneToOne
     private Bracelet bracelet;
+    
+    
+    
+
+	public Person() {
+		super();
+	}
+
+	public Person(long id, String email, String password, String firstname, String lastname, Bracelet bracelet) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.bracelet = bracelet;
+	}
 
 	public long getId() {
 		return id;

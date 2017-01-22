@@ -16,6 +16,12 @@ public class Vibration {
 	
 	@ManyToOne
 	private Bracelet bracelet;
+	
+	
+
+	public Vibration() {
+		super();
+	}
 
 	public long getId() {
 		return id;
