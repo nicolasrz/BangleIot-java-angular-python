@@ -29,6 +29,8 @@ public class MainController {
 		s += "/api/fullinfo?idperson={idperson}";
 		s += "<br>";
 		s += "/api/generate";
+		s += "<br>";
+		s += "/api/vibration?idbracelet={idbracelet}";
 		return s;
 	}
 	
