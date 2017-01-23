@@ -18,6 +18,9 @@ def get_associated_bracelet():
     associated_bracelet =  json.load(http_get)
     http_get.close()
 
+    return associated_bracelet
+
+    
 if __name__ == '__main__':
     
     if(len(sys.argv) > 1 ):
