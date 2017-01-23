@@ -27,8 +27,8 @@ def get_vibrations():
     return vibs_to_send 
 
 if __name__ == '__main__':
-    print "GPIO choosen : "+ sys.argv[1]
     if(len(sys.argv) > 1 ):
+        print "GPIO choosen : "+ sys.argv[1]
         try:
              print 'Press Ctrl-C to quit.'
              while True:
