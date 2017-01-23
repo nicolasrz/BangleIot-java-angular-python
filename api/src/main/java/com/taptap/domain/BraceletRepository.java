@@ -8,6 +8,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface BraceletRepository extends PagingAndSortingRepository<Bracelet, Long> {
 
     Bracelet findById(@Param("id") long id);
+    Bracelet findByDeviceIdentifier(@Param("deviceIdentifier") String deviceIdentifier);
 
 
 }
