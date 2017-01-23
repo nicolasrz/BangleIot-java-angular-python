@@ -23,15 +23,15 @@ if __name__ == '__main__':
     if(len(sys.argv) > 1 ):
     	print "GPIO choosen : "+ sys.argv[1]
         try:
-             print 'Press Ctrl-C to quit.'
-             while True:
-	             gpio_output = sys.argv[1]
-	             GPIO.setmode(GPIO.BCM)
-	             GPIO.setup(int(gpio_output), GPIO.IN)
-	             if GPIO.input(gpio_output):
+            print 'Press Ctrl-C to quit.'
+            while True:
+	            gpio_output = int(sys.argv[1])
+	            GPIO.setmode(GPIO.BCM)
+	            GPIO.setup(gpio_output, GPIO.IN)
+	            if GPIO.input(gpio_output):
 	             	send_vibrations()
 	             	time.sleep(1)
-	             GPIO.cleanup()
+	            GPIO.cleanup()
         finally:
             GPIO.cleanup()
     else:
