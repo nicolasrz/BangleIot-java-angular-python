@@ -3,7 +3,10 @@
 cd mysql-connector-python-2.0.4 <br>
 python setup.py install
 
-#Lauch script
+#To Vibz !
 python get_vibrations.py {PIN GPIO BCM}
+Example : python get_vibrations.py 14
 
-Example : python get_vibrations/py 14
+#To Send Vibs !
+python send_vibrations.py {PIN GPIO BCM}
+Example : python get_vibrations.py 4
