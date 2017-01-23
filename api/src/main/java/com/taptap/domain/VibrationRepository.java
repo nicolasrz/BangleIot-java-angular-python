@@ -11,6 +11,7 @@ public interface VibrationRepository extends PagingAndSortingRepository<Vibratio
 
     List<Vibration> findByBracelet(@Param("bracelet") Bracelet id);
     Vibration findById(@Param("id") long id);
+    List<Vibration> findByBraceletAndState(@Param("bracelet") Bracelet id, @Param("state") boolean state);
 
 
 }

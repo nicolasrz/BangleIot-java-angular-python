@@ -23,29 +23,33 @@ public class MainController {
 	
 	@RequestMapping("/api")
 	public String welcome(){
-		String s = "<strong>api</strong> <br>";
+		String s = "<strong>TAPTAPAPI</strong> <br><br>";
 		s +="<strong>Get person by his email and password</strong><br>";
-		s += "/api/person?email={email}&password={password}";
+		s += "http://localhost:8080/api/person?email={email}&password={password}";
 		s += "<br>";
 		s += "<br>";
 		s +="<strong>Get person, his bracelet and his associated bracelet</strong><br>";
-		s += "/api/fullinfo?idperson={idperson}";
+		s += "http://localhost:8080/api/fullinfo?idperson={idperson}";
 		s += "<br>";
 		s += "<br>";
 		s +="<strong>Generate person and bracelet if base is empty</strong><br>";
-		s += "/api/generate";
+		s += "http://localhost:8080/api/generate";
 		s += "<br>";
 		s += "<br>";
-		s +="<strong>Get vibrations of a bracelet by its id</strong><br>";
-		s += "/api/vibration?idbracelet={idbracelet}";
+		s +="<strong>Get all vibrations of a bracelet by its id</strong><br>";
+		s += "http://localhost:8080/api/vibration/all?idbracelet={idbracelet}";
+		s += "<br>";
+		s += "<br>";
+		s +="<strong>Get all actived vibrations of a bracelet by its id</strong><br>";
+		s += "http://localhost:8080/api/vibration/true?idbracelet={idbracelet}";
 		s += "<br>";
 		s += "<br>";
 		s +="<strong>Add vibration</strong><br>";
-		s += "api/vibration/post?idbracelet={idbracelet}";
+		s += "http://localhost:8080/api/vibration/post?idbracelet={idbracelet}";
 		s += "<br>";
 		s += "<br>";
 		s +="<strong>Put vibration (change state only)</strong><br>";				
-		s += "/api/vibration/put?idvibration={idvibration}&state={true or false}";
+		s += "http://localhost:8080/api/vibration/put?idvibration={idvibration}&state={true or false}";
 		return s;
 	}
 	
@@ -58,10 +62,16 @@ public class MainController {
 		
 	}
 	
-	@RequestMapping(value="/api/vibration")
-	public List<Vibration> vibrations(@RequestParam(value="idbracelet") long idbracelet){
+	@RequestMapping(value="/api/vibration/all")
+	public List<Vibration> allVibrations(@RequestParam(value="idbracelet") long idbracelet){
 		Bracelet bracelet = braceletRepository.findById(idbracelet);
 		List<Vibration> vibrations = vibrationRepository.findByBracelet(bracelet);
+		return vibrations;
+	}
+	@RequestMapping(value="/api/vibration/true")
+	public List<Vibration> vibrationsTrue(@RequestParam(value="idbracelet") long idbracelet){
+		Bracelet bracelet = braceletRepository.findById(idbracelet);
+		List<Vibration> vibrations = vibrationRepository.findByBraceletAndState(bracelet, true);
 		return vibrations;
 	}
 	
