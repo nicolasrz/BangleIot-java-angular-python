@@ -23,14 +23,29 @@ public class MainController {
 	
 	@RequestMapping("/api")
 	public String welcome(){
-		String s = "api <br>";
+		String s = "<strong>api</strong> <br>";
+		s +="<strong>Get person by his email and password</strong><br>";
 		s += "/api/person?email={email}&password={password}";
 		s += "<br>";
+		s += "<br>";
+		s +="<strong>Get person, his bracelet and his associated bracelet</strong><br>";
 		s += "/api/fullinfo?idperson={idperson}";
 		s += "<br>";
+		s += "<br>";
+		s +="<strong>Generate person and bracelet if base is empty</strong><br>";
 		s += "/api/generate";
 		s += "<br>";
+		s += "<br>";
+		s +="<strong>Get vibrations of a bracelet by its id</strong><br>";
 		s += "/api/vibration?idbracelet={idbracelet}";
+		s += "<br>";
+		s += "<br>";
+		s +="<strong>Add vibration</strong><br>";
+		s += "api/vibration/post?idbracelet={idbracelet}";
+		s += "<br>";
+		s += "<br>";
+		s +="<strong>Put vibration (change state only)</strong><br>";				
+		s += "/api/vibration/put?idvibration={idvibration}&state={true or false}";
 		return s;
 	}
 	
@@ -48,6 +63,28 @@ public class MainController {
 		Bracelet bracelet = braceletRepository.findById(idbracelet);
 		List<Vibration> vibrations = vibrationRepository.findByBracelet(bracelet);
 		return vibrations;
+	}
+	
+	@RequestMapping(value="/api/vibration/put")
+	public String putVibration(@RequestParam(value="idvibration") long idvibration,
+			@RequestParam(value="state") boolean state){		
+		
+		Vibration vib = vibrationRepository.findById(idvibration);
+		vib.setState(state);
+		vib = vibrationRepository.save(vib);
+		return "vibration putted";
+	}
+	
+	@RequestMapping(value="/api/vibration/post")
+	public String postVibration(@RequestParam(value="idbracelet") long idbracelet){		
+		
+		Bracelet bracelet = braceletRepository.findById(idbracelet);
+		Vibration vib = new Vibration();
+		vib.setState(true);
+		vib.setBracelet(bracelet);
+		vib = vibrationRepository.save(vib);
+		
+		return "vibration added";
 	}
    
     @RequestMapping("/api/fullinfo")

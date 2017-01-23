@@ -10,6 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface VibrationRepository extends PagingAndSortingRepository<Vibration, Long> {
 
     List<Vibration> findByBracelet(@Param("bracelet") Bracelet id);
+    Vibration findById(@Param("id") long id);
 
 
 }
