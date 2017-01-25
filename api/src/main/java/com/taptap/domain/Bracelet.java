@@ -14,6 +14,7 @@ public class Bracelet {
     private String deviceIdentifier;
 
     @OneToOne
+    @JoinColumn(name="associated_bracelet")
     private Bracelet bracelet;
     
     
