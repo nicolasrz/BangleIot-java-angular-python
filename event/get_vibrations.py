@@ -35,7 +35,11 @@ if __name__ == '__main__':
         try:
             print 'Press Ctrl-C to quit.'
             while True:
-                vibrations = get_vibrations()
+                try:
+                    vibrations = get_vibrations()
+                except:
+                    vibrations = 0    
+                
                 if(vibrations > 0):
                     i = 0
                     while i < vibrations:
