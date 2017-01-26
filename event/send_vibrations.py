@@ -28,10 +28,6 @@ if __name__ == '__main__':
         try:
             print 'Press Ctrl-C to quit.'
             while True:
-            	try:
-                    vibrations = get_vibrations()
-                except:
-                    vibrations = 0
 	            gpio_input = int(sys.argv[1])
 	            GPIO.setmode(GPIO.BCM)
 	            
