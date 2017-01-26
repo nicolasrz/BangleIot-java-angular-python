@@ -40,8 +40,8 @@ public class MainController {
 		s += "<a href='http://localhost:8080/api/bracelet/associated/id?idbracelet={idOwnBracelet}'>http://localhost:8080/api/bracelet/associated/id?idbracelet{idOwnBracelet}</a>";
 		s += "<br>";
 		s += "<br>";
-		s +="<strong>Get associated bracelet by his own bracelet identifier</strong><br>";
-		s += "<a href='http://localhost:8080/api/bracelet/associated/deviceidentifier?deviceidentifier={ownDeviceIdentifier}'>http://localhost:8080/api/bracelet/associated/deviceidentifier?deviceidentifier{ownDeviceIdentifier}</a>";
+		s +="<strong>Get his bracelet by his own bracelet identifier</strong><br>";
+		s += "<a href='http://localhost:8080/api/bracelet/deviceidentifier?deviceidentifier={ownDeviceIdentifier}'>http://localhost:8080/api/bracelet/deviceidentifier?deviceidentifier{ownDeviceIdentifier}</a>";
 		s += "<br>";
 		s += "<br>";
 		
@@ -88,12 +88,10 @@ public class MainController {
 		return braceletAssociated;
 	}
 	
-	@RequestMapping(value="/api/bracelet/associated/deviceidentifier")
-	public Bracelet getAssociatedBraceletByDeviceIdentifier(@RequestParam(value="deviceidentifier") String deviceidentifier){
+	@RequestMapping(value="/api/bracelet/deviceidentifier")
+	public Bracelet getBraceletByDeviceIdentifier(@RequestParam(value="deviceidentifier") String deviceidentifier){
 		Bracelet bracelet = braceletRepository.findByDeviceIdentifier(deviceidentifier);
-		Bracelet braceletAssociated = bracelet.getBracelet();
-
-		return braceletAssociated;
+		return bracelet;
 	}
 	
 	@RequestMapping(value="/api/vibration/all")
