@@ -1,50 +1,54 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import mysql.connector 
-import RPi.GPIO as GPIO 
+#import RPi.GPIO as GPIO 
 import sys 
 import time
-def get_vibrations():
-    device_identifier = "bracelet_nicolas"
-    conn = mysql.connector.connect(host="adresse of server api",user="taptapapi",password="taptapapi", database="taptapapi")
-    cursor = conn.cursor()
-    cursor.execute("SELECT bracelet_id FROM bracelet WHERE device_identifier = '" + device_identifier +"'")
-    bracelet_associated = cursor.fetchone()
-    bracelet_associated = bracelet_associated[0]
-    cursor.execute("SELECT * FROM vibration WHERE bracelet_id = '"+str(bracelet_associated)+"' AND state = 1")
-    vibrations = cursor.fetchall()
-    if(len(vibrations) > 0 ):
-        print str(len(vibrations)) + " vibrations à envoyer"
-    vibs_to_send = len(vibrations)
-    for vib in vibrations:
-        id = vib[0]
-        state = vib[1]
-        bracelet_id = vib[2]
-        cursor.execute("UPDATE vibration SET state = 0 WHERE id = "+str(id)+ " AND bracelet_id="+str(bracelet_id))
-        conn.commit()
-    conn.close()
+import urllib2
+import json
 
-    return vibs_to_send 
+def get_bracelet():
+    device_identifier = "bracelet_nicolas"
+    http_get = urllib2.urlopen("http://localhost:8080/api/bracelet/deviceidentifier?deviceidentifier="+device_identifier)
+    my_bracelet =  json.load(http_get)
+    http_get.close()
+
+    return my_bracelet
+
+
+def get_vibrations():
+    my_bracelet = get_bracelet()
+    vibrations = urllib2.urlopen("http://localhost:8080/api/vibration/true?idbracelet="+str(my_bracelet['id']))
+    vibrationsTrue = json.load(vibrations)
+    vibrations.close()
+    
+    print "Number of vibrations coming : " + str(len(vibrationsTrue))   
+    print vibrationsTrue
+    for vib in vibrationsTrue:
+        id = vib['id']
+        http_put = urllib2.urlopen("http://localhost:8080/api/vibration/put?idvibration="+str(id)+"&state=false")
+
+    return len(vibrationsTrue)
 
 if __name__ == '__main__':
     if(len(sys.argv) > 1 ):
         print "GPIO choosen : "+ sys.argv[1]
         try:
-             print 'Press Ctrl-C to quit.'
-             while True:
-                 vibrations = get_vibrations()
-                 if(vibrations > 0):
-                     i = 0
-                     while i < vibrations:
-                         gpio_output = sys.argv[1]
-                         GPIO.setmode(GPIO.BCM)
-                         GPIO.setup(int(sys.argv[1]), GPIO.OUT)
-                         GPIO.output(int(gpio_output) ,GPIO.HIGH)
-                         time.sleep(1)
-                         GPIO.output(int(gpio_output), GPIO.LOW)
-                         time.sleep(1)
-                         GPIO.cleanup()
-                         i = i + 1
+            print 'Press Ctrl-C to quit.'
+            while True:
+                vibrations = get_vibrations()
+                if(vibrations > 0):
+                    i = 0
+                    while i < vibrations:
+                        print "vibration : " + str(i)
+                        gpio_output = sys.argv[1]
+                        GPIO.setmode(GPIO.BCM)
+                        GPIO.setup(int(sys.argv[1]), GPIO.OUT)
+                        GPIO.output(int(gpio_output) ,GPIO.HIGH)
+                        time.sleep(1)
+                        GPIO.output(int(gpio_output), GPIO.LOW)
+                        time.sleep(1)
+                        GPIO.cleanup()
+                        i = i + 1
         finally:
             GPIO.cleanup()
     else:
