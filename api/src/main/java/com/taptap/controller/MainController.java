@@ -44,6 +44,10 @@ public class MainController {
 		s += "<a href='http://localhost:8080/api/bracelet/deviceidentifier?deviceidentifier={ownDeviceIdentifier}'>http://localhost:8080/api/bracelet/deviceidentifier?deviceidentifier{ownDeviceIdentifier}</a>";
 		s += "<br>";
 		s += "<br>";
+		s +="<strong>Get associated bracelet by his own bracelet identifier</strong><br>";
+		s += "<a href='http://localhost:8080/api/bracelet/associated/devideidentifier?deviceidentifier={ownDeviceIdentifier}'>api/bracelet/associated/devideidentifier?deviceidentifier{ownDeviceIdentifier}</a>";
+		s += "<br>";
+		s += "<br>";
 		
 		s += "<br> <strong># Vibrations</strong><br>";
 		s +="<strong>Get all vibrations of a bracelet by its id</strong><br>";
