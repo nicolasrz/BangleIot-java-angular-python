@@ -88,6 +88,15 @@ public class MainController {
 		return braceletAssociated;
 	}
 	
+	@RequestMapping(value="/api/bracelet/associated/deviceidentifier")
+	public Bracelet getAssociatedBraceletByHisDeviceIdentifier(@RequestParam(value="deviceidentifier") String deviceidentifier){
+		Bracelet bracelet = braceletRepository.findByDeviceIdentifier(deviceidentifier);
+		
+		Bracelet braceletAssociated = bracelet.getBracelet();
+
+		return braceletAssociated;
+	}
+	
 	@RequestMapping(value="/api/bracelet/deviceidentifier")
 	public Bracelet getBraceletByDeviceIdentifier(@RequestParam(value="deviceidentifier") String deviceidentifier){
 		Bracelet bracelet = braceletRepository.findByDeviceIdentifier(deviceidentifier);
