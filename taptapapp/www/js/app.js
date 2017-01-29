@@ -33,6 +33,7 @@ app.controller('MainCtrl', function($scope, $http, $location){
 		    	localStorage.setItem("email", personFound.email);
 		    	localStorage.setItem("idPerson", personFound.id);	
 		    	$location.path("/bangle");
+		    	console.log('connected with : ' + personFound.firstname);
 		    }
 		  }, function errorCallback(response) {
 		    console.log(response);
@@ -45,6 +46,7 @@ app.controller('BangleCtrl',function($location, $scope, $http){
 		$location.path("/home");
 	}
 	var idPerson =localStorage.getItem("idPerson");
+	console.log("idperson : " + idPerson);
 		$http({
 		  method: 'GET',
 		  url: 'http://localhost:8080/api/fullinfo?idperson='+idPerson
@@ -52,6 +54,7 @@ app.controller('BangleCtrl',function($location, $scope, $http){
 			var fullinfo = response.data;
 			$scope.fullinfo = fullinfo;
 			$scope.vibrations = fullinfo.vibrations;
+			console.log("fullinfo : " + $scope.fullinfo);
 		  }, function errorCallback(response) {
 		    console.log(response);
 	  	});
@@ -64,7 +67,7 @@ app.controller('BangleCtrl',function($location, $scope, $http){
 			method :'GET',
 			url : 'http://localhost:8080/api/vibration/post?idbracelet='+$scope.fullinfo.bracelet_associated.id
 		}).then(function successCallback(response){
-			console.log('vibration sent');
+			console.log('vibration sent to id bracelet : ' + $scope.fullinfo.bracelet_associated.id );
 			$scope.vibrationsSent ++;
 		}, function errorCallback(response){
 			console.log(response);
