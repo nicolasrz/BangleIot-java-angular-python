@@ -6,7 +6,7 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div> -->
-        <div ng-controller="MainCtrl" class="container-fluid">
+        <div ng-controller="MainCtrl">
            <!--  <form>
                 First Name: <input type="text" ng-model="firstname">
                 Last Name: <input type="text" ng-model="lastname"
@@ -16,18 +16,23 @@
 
 
             <form class="pure-form pure-form-stacked">
-        <fieldset>
-            <legend>Connection</legend>
-    
-            <label for="text">Firstname</label>
-            <input id="text" type="text" placeholder="Firstname" ng-model="firstname">
-    
-            <label for="text">Lastname</label>
-            <input id="text" type="text" placeholder="Lastname" ng-model="lastname">
-    
-    
-            <button type="submit" class="pure-button pure-button-primary" ng-click="connection()">Sign in</button>
-        </fieldset>
+            <legend style="font-size:500%;" ><strong>Connection</strong></legend>
+            <table style="font-size:500%">
+                <tr>
+                    <td><label for="text">Email</label></td>
+                </tr>
+                <tr>
+                    <td><input id="text" type="text" placeholder="Email" ng-model="email" style="min-height:200px;font-size:60%"></td>
+                </tr>
+                <tr>
+                    <td><label for="text">Password</label></td>
+                </tr>
+                <tr>
+                    <td><input id="text" type="password" placeholder="Password" ng-model="password" style="min-height:200px;font-size:60%"></td>
+                </tr>
+            </table>
+            <button type="submit" class="pure-button pure-button-primary" ng-click="connection()" style="min-height:200px;min-width: 100%;">Sign in</button>
+
     </form>
 
 

@@ -20,63 +20,75 @@ app.config(function($routeProvider){
 app.controller('MainCtrl', function($scope, $http, $location){
 
 	$scope.connection = function(){
-		var firstname = $scope.firstname;
-		var lastname = $scope.lastname;
+		var email = $scope.email;
+		var password = $scope.password;
 
 		$http({
 		  method: 'GET',
-		  url: 'http://localhost9:8080/person/search/findByFirstnameAndLastname?firstname='+firstname+'&lastname='+lastname
+		  url: 'http://localhost:8080/person/search/findByEmailAndPassword?email='+email+'&password='+password
 		}).then(function successCallback(response) {
 			var personFound = response.data;
-		    if(personFound.firstname == $scope.firstname && personFound.lastname == $scope.lastname){
-		    	localStorage.setItem("lastname", personFound.lastname);
+		    if(personFound.email == $scope.email && personFound.password == $scope.password){
 		    	localStorage.setItem("firstname", personFound.firstname);
+		    	localStorage.setItem("email", personFound.email);
 		    	localStorage.setItem("idPerson", personFound.id);	
 		    	$location.path("/bangle");
 		    }
 		  }, function errorCallback(response) {
-		    alert(response);
+		    console.log(response);
 		  });
 	}	
 })
 
 app.controller('BangleCtrl',function($location, $scope, $http){
-	if(localStorage.getItem("lastname") == "" ||  localStorage.getItem("lastname") == undefined){
+	if(localStorage.getItem("idPerson") == "" ||  localStorage.getItem("idPerson") == undefined){
 		$location.path("/home");
 	}
+	var idPerson =localStorage.getItem("idPerson");
+		$http({
+		  method: 'GET',
+		  url: 'http://localhost:8080/api/fullinfo?idperson='+idPerson
+		}).then(function successCallback(response) {
+			var fullinfo = response.data;
+			$scope.fullinfo = fullinfo;
+			$scope.vibrations = fullinfo.vibrations;
+		  }, function errorCallback(response) {
+		    console.log(response);
+	  	});
+
+
+	$scope.vibrationsSent = 0;
 
 	$scope.sendVibration = function(){
-
+		$http({
+			method :'GET',
+			url : 'http://localhost:8080/api/vibration/post?idbracelet='+$scope.fullinfo.bracelet_associated.id
+		}).then(function successCallback(response){
+			console.log('vibration sent');
+			$scope.vibrationsSent ++;
+		}, function errorCallback(response){
+			console.log(response);
+		});
 	}
 
 	$scope.getVibration = function(){
-		var idPerson =localStorage.getItem("idPerson");
-
 		$http({
 		  method: 'GET',
-		  url: 'http://localhost9:8080/person/'+idPerson+'/bracelet'
+		  url: 'http://localhost:8080/api/fullinfo?idperson='+1
 		}).then(function successCallback(response) {
-			var bracelet = response.data;
-			var idBracelet = bracelet.id;
-			
-			$http({
-			    method: 'GET',
-		  		url: 'http://localhost9:8080/bracelet/'+idBracelet+'/bracelets'
-			}).then(function successCallback(response){
-				var associatedBraceletId = response.data._embedded.bracelet[0].id;
-				console.log(associatedBraceletId);
-			}, function errorCallback(response){
-				alert(reponse);
-			})
-
-
-
+			var fullinfo = response.data;
+			$scope.vibrations = fullinfo.vibrations;
 		  }, function errorCallback(response) {
-		    alert(response);
+		    console.log(response);
 	  	});
-	
 	}
 
+	$scope.deconnection = function(){
+		localStorage.removeItem("idPerson");
+		console.log('disconnected');
+		$location.path("/home");
+	}
 
+	
 	
 })

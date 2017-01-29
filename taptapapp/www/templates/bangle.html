@@ -1,5 +1,17 @@
 <div ng-controller="BangleCtrl">
+	<div style="background-color:#0080FF;min-height: 300px; text-align: center;font-size: 500%; border : 1px solid black;" ng-click="getVibration()">
+		Get vibrations
+		<div style="font-size: 50%;"> Vibs standing : {{vibrations}}</div>
+	</div>
 
-<button class="pure-button pure-button-primary"  ng-click="sendVibration()">Send vibration to the associated bangle</button>
-    <button class="pure-button pure-button-primary" ng-click="getVibration()">Get vibration</button>
+	<div style="background-color:#6666FF;min-height: 300px; text-align: center;font-size: 300%; border : 1px solid black;" ng-click="sendVibration()">
+	 Send Vibrations to associated
+	 	<div style="font-size: 50%;"> Vibs sent : {{vibrationsSent}}</div>
+	</div>
+
+
+	<div style="background-color:#CC0000;min-height: 300px; text-align: center;font-size: 300%; border : 1px solid black;" ng-click="deconnection()">
+	 Deconnection
+	</div>
 </div>
+
