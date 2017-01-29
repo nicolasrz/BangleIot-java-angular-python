@@ -72,6 +72,12 @@ public class MainController {
 		s += "<a href='http://localhost:8080/api/generate'>http://localhost:8080/api/generate</a>";
 		s += "<br>";
 		s += "<br>";
+		
+		s += "<br> # <strong>Full information</strong><br>";
+		s +="<strong>Generate all information about one user</strong><br>";
+		s += "<a href='http://localhost:8080/api/fullinfo?idperson={idperson}'>http://localhost:8080/api/fullinfo?idperson={idperson}</a>";
+		s += "<br>";
+		s += "<br>";
 		return s;
 	}
 	
@@ -106,6 +112,7 @@ public class MainController {
 		Bracelet bracelet = braceletRepository.findByDeviceIdentifier(deviceidentifier);
 		return bracelet;
 	}
+
 	
 	@RequestMapping(value="/api/vibration/all")
 	public List<Vibration> allVibrations(@RequestParam(value="idbracelet") long idbracelet){
@@ -131,15 +138,16 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/api/vibration/post")
-	public String postVibration(@RequestParam(value="idbracelet") long idbracelet){		
-		
+	public HashMap<String, String> postVibration(@RequestParam(value="idbracelet") long idbracelet){		
+		HashMap<String, String> map = new HashMap<>();
+		map.put("success", "vibration added");
 		Bracelet bracelet = braceletRepository.findById(idbracelet);
 		Vibration vib = new Vibration();
 		vib.setState(true);
 		vib.setBracelet(bracelet);
 		vib = vibrationRepository.save(vib);
 		
-		return "vibration added";
+		return map;
 	}
    
     @RequestMapping("/api/fullinfo")
@@ -151,6 +159,10 @@ public class MainController {
     	
     	if(person.getBracelet() != null){
     		fullinfo.put("bracelet", person.getBracelet());
+    		List<Vibration> vibrations = vibrationRepository.findByBraceletAndState(person.getBracelet(), true);
+    		if(vibrations != null){
+    			fullinfo.put("vibrations", vibrations.size());
+    		}
     		if(person.getBracelet().getBracelet() != null){
     			fullinfo.put("bracelet_associated", person.getBracelet().getBracelet());
     		}
