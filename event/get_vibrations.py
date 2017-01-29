@@ -6,18 +6,18 @@ import time
 import urllib2
 import json
 
-def get_bracelet():
+def get_bracelet(server):
     device_identifier = "bracelet_nicolas"
-    http_get = urllib2.urlopen("http://localhost:8080/api/bracelet/deviceidentifier?deviceidentifier="+device_identifier)
+    http_get = urllib2.urlopen("http://"+server+":8080/api/bracelet/deviceidentifier?deviceidentifier="+device_identifier)
     my_bracelet =  json.load(http_get)
     http_get.close()
 
     return my_bracelet
 
 
-def get_vibrations():
-    my_bracelet = get_bracelet()
-    vibrations = urllib2.urlopen("http://localhost:8080/api/vibration/true?idbracelet="+str(my_bracelet['id']))
+def get_vibrations(server):
+    my_bracelet = get_bracelet(server)
+    vibrations = urllib2.urlopen("http://"+server+":8080/api/vibration/true?idbracelet="+str(my_bracelet['id']))
     vibrationsTrue = json.load(vibrations)
     vibrations.close()
     
@@ -36,7 +36,8 @@ if __name__ == '__main__':
             print 'Press Ctrl-C to quit.'
             while True:
                 try:
-                    vibrations = get_vibrations()
+				    server = "localhost"
+                    vibrations = get_vibrations(server)
                 except:
                     vibrations = 0    
                 
