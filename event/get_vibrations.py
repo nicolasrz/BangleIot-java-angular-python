@@ -25,7 +25,7 @@ def get_vibrations(server):
     print vibrationsTrue
     for vib in vibrationsTrue:
         id = vib['id']
-        http_put = urllib2.urlopen("http://localhost:8080/api/vibration/put?idvibration="+str(id)+"&state=false")
+        http_put = urllib2.urlopen("http://"+server+":8080/api/vibration/put?idvibration="+str(id)+"&state=false")
 
     return len(vibrationsTrue)
 
@@ -35,8 +35,9 @@ if __name__ == '__main__':
         try:
             print 'Press Ctrl-C to quit.'
             while True:
+                #if script launched on raspberry startup.
                 try:
-				    server = "localhost"
+		    server = "localhost"
                     vibrations = get_vibrations(server)
                 except:
                     vibrations = 0    
