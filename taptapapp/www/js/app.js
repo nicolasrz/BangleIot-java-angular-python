@@ -25,7 +25,7 @@ app.controller('MainCtrl', function($scope, $http, $location){
 
 		$http({
 		  method: 'GET',
-		  url: 'http://149.202.62.129:8080/person/search/findByEmailAndPassword?email='+email+'&password='+password
+		  url: 'http://server:8080/person/search/findByEmailAndPassword?email='+email+'&password='+password
 		}).then(function successCallback(response) {
 			var personFound = response.data;
 		    if(personFound.email == $scope.email && personFound.password == $scope.password){
@@ -49,7 +49,7 @@ app.controller('BangleCtrl',function($location, $scope, $http){
 	console.log("idperson : " + idPerson);
 		$http({
 		  method: 'GET',
-		  url: 'http://149.202.62.129:8080/api/fullinfo?idperson='+idPerson
+		  url: 'http://server:8080/api/fullinfo?idperson='+idPerson
 		}).then(function successCallback(response) {
 			var fullinfo = response.data;
 			$scope.fullinfo = fullinfo;
@@ -65,7 +65,7 @@ app.controller('BangleCtrl',function($location, $scope, $http){
 	$scope.sendVibration = function(){
 		$http({
 			method :'GET',
-			url : 'http://149.202.62.129:8080/api/vibration/post?idbracelet='+$scope.fullinfo.bracelet_associated.id
+			url : 'http://server:8080/api/vibration/post?idbracelet='+$scope.fullinfo.bracelet_associated.id
 		}).then(function successCallback(response){
 			console.log('vibration sent to id bracelet : ' + $scope.fullinfo.bracelet_associated.id );
 			$scope.vibrationsSent ++;
@@ -77,7 +77,7 @@ app.controller('BangleCtrl',function($location, $scope, $http){
 	$scope.getVibration = function(){
 		$http({
 		  method: 'GET',
-		  url: 'http://149.202.62.129:8080/api/fullinfo?idperson='+idPerson
+		  url: 'http://server:8080/api/fullinfo?idperson='+idPerson
 		}).then(function successCallback(response) {
 			var fullinfo = response.data;
 			$scope.vibrations = fullinfo.vibrations;
